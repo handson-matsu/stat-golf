@@ -1,0 +1,9 @@
+{
+  "name": "stat-golf",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node tests/core.test.js && node tests/theme.test.js && node tests/speed.test.js && node tests/access-counter.test.cjs",
+    "simulate": "node tests/balance.js"
+  }
+}

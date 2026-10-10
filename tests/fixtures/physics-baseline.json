@@ -1,0 +1,308 @@
+{
+  "tools": [
+    {
+      "id": "steady",
+      "range": 1000,
+      "speed": 0.65,
+      "spread": 39
+    },
+    {
+      "id": "balanced",
+      "range": 1080,
+      "speed": 0.95,
+      "spread": 30
+    },
+    {
+      "id": "precise",
+      "range": 1160,
+      "speed": 1.6,
+      "spread": 18
+    },
+    {
+      "id": "power",
+      "range": 1350,
+      "speed": 1.15,
+      "spread": 25
+    }
+  ],
+  "targets": [
+    {
+      "id": "near",
+      "name": "近距離",
+      "x": 330,
+      "y": 420,
+      "radii": [
+        30,
+        65,
+        100
+      ],
+      "points": [
+        60,
+        40,
+        20
+      ]
+    },
+    {
+      "id": "mid",
+      "name": "中距離",
+      "x": 600,
+      "y": 300,
+      "radii": [
+        24,
+        52,
+        85
+      ],
+      "points": [
+        100,
+        60,
+        20
+      ]
+    },
+    {
+      "id": "far",
+      "name": "遠距離",
+      "x": 890,
+      "y": 170,
+      "radii": [
+        24,
+        52,
+        90
+      ],
+      "points": [
+        150,
+        80,
+        10
+      ]
+    }
+  ],
+  "shots": [
+    {
+      "input": {
+        "tool": "steady",
+        "target": "near",
+        "power": 0.2761340254296815,
+        "direction": 0.07,
+        "seed": 42
+      },
+      "output": {
+        "tool": "steady",
+        "target": "near",
+        "x": 298.89565614565504,
+        "y": 415.7855730491022,
+        "score": 40,
+        "power": 0.2761340254296815,
+        "direction": 0.07,
+        "idealPower": 0.2761340254296815
+      }
+    },
+    {
+      "input": {
+        "tool": "steady",
+        "target": "mid",
+        "power": 0.5703069349043549,
+        "direction": 0.07,
+        "seed": 42
+      },
+      "output": {
+        "tool": "steady",
+        "target": "mid",
+        "x": 558.7692690044981,
+        "y": 298.5598236026869,
+        "score": 60,
+        "power": 0.5703069349043549,
+        "direction": 0.07,
+        "idealPower": 0.5703069349043549
+      }
+    },
+    {
+      "input": {
+        "tool": "steady",
+        "target": "far",
+        "power": 0.8877218032694703,
+        "direction": 0.07,
+        "seed": 42
+      },
+      "output": {
+        "tool": "steady",
+        "target": "far",
+        "x": 837.8555479144587,
+        "y": 171.52170740543454,
+        "score": 10,
+        "power": 0.8877218032694703,
+        "direction": 0.07,
+        "idealPower": 0.8877218032694703
+      }
+    },
+    {
+      "input": {
+        "tool": "balanced",
+        "target": "near",
+        "power": 0.255679653175631,
+        "direction": 0.07,
+        "seed": 42
+      },
+      "output": {
+        "tool": "balanced",
+        "target": "near",
+        "x": 306.8545325705329,
+        "y": 418.05818010546545,
+        "score": 60,
+        "power": 0.255679653175631,
+        "direction": 0.07,
+        "idealPower": 0.255679653175631
+      }
+    },
+    {
+      "input": {
+        "tool": "balanced",
+        "target": "mid",
+        "power": 0.5280619767632916,
+        "direction": 0.07,
+        "seed": 42
+      },
+      "output": {
+        "tool": "balanced",
+        "target": "mid",
+        "x": 569.706372752352,
+        "y": 301.68284472107683,
+        "score": 60,
+        "power": 0.5280619767632916,
+        "direction": 0.07,
+        "idealPower": 0.5280619767632916
+      }
+    },
+    {
+      "input": {
+        "tool": "balanced",
+        "target": "far",
+        "power": 0.8219646326569169,
+        "direction": 0.07,
+        "seed": 42
+      },
+      "output": {
+        "tool": "balanced",
+        "target": "far",
+        "x": 852.0061822194666,
+        "y": 175.56233194297036,
+        "score": 80,
+        "power": 0.8219646326569169,
+        "direction": 0.07,
+        "idealPower": 0.8219646326569169
+      }
+    },
+    {
+      "input": {
+        "tool": "precise",
+        "target": "near",
+        "power": 0.23804657364627715,
+        "direction": 0.07,
+        "seed": 42
+      },
+      "output": {
+        "tool": "precise",
+        "target": "near",
+        "x": 317.46636780370346,
+        "y": 421.08832284728317,
+        "score": 60,
+        "power": 0.23804657364627715,
+        "direction": 0.07,
+        "idealPower": 0.23804657364627715
+      }
+    },
+    {
+      "input": {
+        "tool": "precise",
+        "target": "mid",
+        "power": 0.49164390940030595,
+        "direction": 0.07,
+        "seed": 42
+      },
+      "output": {
+        "tool": "precise",
+        "target": "mid",
+        "x": 584.2891777494904,
+        "y": 305.8468728789301,
+        "score": 100,
+        "power": 0.49164390940030595,
+        "direction": 0.07,
+        "idealPower": 0.49164390940030595
+      }
+    },
+    {
+      "input": {
+        "tool": "precise",
+        "target": "far",
+        "power": 0.7652774166116123,
+        "direction": 0.07,
+        "seed": 42
+      },
+      "output": {
+        "tool": "precise",
+        "target": "far",
+        "x": 870.8736946261439,
+        "y": 180.94983132635147,
+        "score": 150,
+        "power": 0.7652774166116123,
+        "direction": 0.07,
+        "idealPower": 0.7652774166116123
+      }
+    },
+    {
+      "input": {
+        "tool": "power",
+        "target": "near",
+        "power": 0.20454372254050482,
+        "direction": 0.07,
+        "seed": 42
+      },
+      "output": {
+        "tool": "power",
+        "target": "near",
+        "x": 301.3275350532566,
+        "y": 416.47998076076874,
+        "score": 60,
+        "power": 0.20454372254050482,
+        "direction": 0.07,
+        "idealPower": 0.20454372254050482
+      }
+    },
+    {
+      "input": {
+        "tool": "power",
+        "target": "mid",
+        "power": 0.42244958141063327,
+        "direction": 0.07,
+        "seed": 42
+      },
+      "output": {
+        "tool": "power",
+        "target": "mid",
+        "x": 580.3396680627654,
+        "y": 304.71911525284486,
+        "score": 100,
+        "power": 0.42244958141063327,
+        "direction": 0.07,
+        "idealPower": 0.42244958141063327
+      }
+    },
+    {
+      "input": {
+        "tool": "power",
+        "target": "far",
+        "power": 0.6575717061255335,
+        "direction": 0.07,
+        "seed": 42
+      },
+      "output": {
+        "tool": "power",
+        "target": "far",
+        "x": 865.7637433493354,
+        "y": 179.4907169100191,
+        "score": 80,
+        "power": 0.6575717061255335,
+        "direction": 0.07,
+        "idealPower": 0.6575717061255335
+      }
+    }
+  ]
+}
