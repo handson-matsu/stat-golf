@@ -1,5 +1,5 @@
 import {DEFAULT_SPEED,meterPosition,speedLabel} from './speed.js';
-import {ORIGIN,TARGETS,TOOLS,stats,histogram,shoot,idealPower,csv} from './core.js';
+import {ORIGIN,TARGETS,TOOLS,stats,histogram,shoot,idealPower,csv,detailedCsv} from './core.js';
 import {cannonSVG,drawCannon} from './cannon-art.js';
 const $=id=>document.getElementById(id), KEY='stat-golf-v1',palette=['#409657','#d98912','#3488c9','#d65391'];
 let saved=[],current=null,selectedTool=TOOLS[0],phase='ready',power=0,direction=0,meter=0,start=0,animation=null,flight=null,resultId='current',shotSpeed=DEFAULT_SPEED;
@@ -51,7 +51,9 @@ function lineChart(id,series){const len=Math.max(1,...series.map(s=>s.values.len
 function renderCompare(){const ids=[...document.querySelectorAll('#compare-list input:checked')].map(x=>x.value),experiments=saved.filter(e=>ids.includes(e.id));$('compare-charts').hidden=experiments.length<2;if(experiments.length<2){$('comparison').innerHTML='<div class="empty">比較する実験を2〜4件選択してください。</div>';return;}$('comparison').innerHTML='<div class="panel table-scroll"><table><thead><tr><th>統計量</th>'+experiments.map(e=>`<th>${esc(e.name)}</th>`).join('')+'</tr></thead><tbody>'+Object.entries(statLabels).map(([k,label])=>`<tr><td>${label}</td>${experiments.map(e=>{const s=stats(e.shots.map(s=>s.score));return `<td>${k==='zeroRate'?(s[k]===null?'—':fmt(s[k]*100)+'%'):fmt(s[k])}</td>`;}).join('')}</tr>`).join('')+'</tbody></table></div>';barChart('compare-hist',experiments.map(e=>({name:e.name,values:e.shots.map(s=>s.score)})),Number($('compare-bin').value),$('frequency').value==='relative');lineChart('compare-trend',experiments.map(e=>{let total=0;return {name:e.name,values:e.shots.map((s,i)=>(total+=s.score)/(i+1))};}));}
 $('compare-list').onchange=e=>{if(document.querySelectorAll('#compare-list input:checked').length>4){e.target.checked=false;alert('比較は4件まで選択できます。');}renderCompare();};$('frequency').onchange=renderCompare;$('compare-bin').onchange=renderCompare;$('bin').onchange=renderResults;$('result-select').onchange=()=>{resultId=$('result-select').value;renderResults();};
 $('save').onclick=()=>{const e=displayed();if(!e.shots.length){alert('1回発射してから保存してね。');return;}const name=prompt('実験名を入力してください',e.name);if(name===null)return;e.name=name.trim().slice(0,80)||e.name;const i=saved.findIndex(x=>x.id===e.id);if(i>=0)saved[i]=structuredClone(e);else saved.push(structuredClone(e));persist();refreshLists();renderResults();};
-$('csv').onclick=()=>{const e=displayed(),url=URL.createObjectURL(new Blob([csv(e)],{type:'text/csv;charset=utf-8'})),a=document.createElement('a');a.href=url;a.download=e.name.replace(/[\\/:*?"<>|]/g,'_')+'.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
+function downloadCsv(details=false){const e=displayed(),url=URL.createObjectURL(new Blob([details?detailedCsv(e):csv(e)],{type:'text/csv;charset=utf-8'})),a=document.createElement('a');a.href=url;a.download=e.name.replace(/[\\/:*?"<>|]/g,'_')+(details?'_詳細データ':'')+'.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
+$('csv').onclick=()=>downloadCsv();
+$('csv-details').onclick=()=>downloadCsv(true);
 document.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>{document.querySelectorAll('.view').forEach(v=>v.hidden=v.id!==b.dataset.view);document.querySelectorAll('[data-view]').forEach(n=>n.classList.toggle('active',n===b));if(b.dataset.view==='results')renderResults();if(b.dataset.view==='compare')renderCompare();});
 refreshLists();sync();drawCourse();persist();
 
