@@ -9,7 +9,7 @@ assert.deepEqual(rows,[headers,['1',TOOLS[0].name,'遠距離','近距離','60','
 assert.ok(rows.every(r=>r.length===7));assert.ok(!text.includes(experiment.name));assert.ok(text.startsWith('\uFEFF'));assert.ok(text.includes('\r\n'));
 for(const t of TARGETS){assert.equal(hitTarget({x:t.x+t.radii[2],y:t.y}),t.name);assert.equal(hitTarget({x:t.x+t.radii[2]+.001,y:t.y}),'的外');}
 for(const shot of [{x:-1,y:0},{x:1101,y:300},{x:10,y:10},{x:100,y:100}])assert.equal(hitTarget(shot),'的外');
-const detailed=parseCsv(detailedCsv(experiment));assert.equal(detailed[0].length,13);assert.deepEqual(detailed[1],[experiment.name,'experiment','1',shots[0].time,TOOLS[0].name,'遠距離','330','420','60','0.3','-0.2','0.88','0.5']);assert.equal(JSON.stringify(experiment),before);
+const detailed=parseCsv(detailedCsv(experiment));assert.equal(detailed[0].length,14);assert.deepEqual(detailed[1],[experiment.name,'experiment','1',shots[0].time,TOOLS[0].name,'遠距離','330','420','60','0.3','-0.2','0.88','0.5','']);assert.equal(JSON.stringify(experiment),before);
 const legacy=JSON.parse(readFileSync(new URL('./fixtures/stat-golf-v1.json',import.meta.url))),original=JSON.stringify(legacy);for(const e of [legacy.current,...legacy.saved]){const out=parseCsv(csv(e));assert.deepEqual(out[0],headers);out.slice(1).forEach((r,i)=>{assert.equal(r[0],String(i+1));assert.equal(r[4],String(e.shots[i].score));assert.equal(r[5],'はやい');assert.equal(r[6],e.shots[i].time);});}assert.equal(JSON.stringify(legacy),original);
 assert.deepEqual(parseCsv(csv({shots:[]})),[headers]);
-console.log('PASS: exact 7 columns and every field, actual vs aimed targets, misses/boundaries, 3 speed labels and legacy 100%, 13-column details, BOM/CRLF/escaping, empty data, no record mutation');
+console.log('PASS: exact 7 columns and every field, actual vs aimed targets, misses/boundaries, 3 speed labels and legacy 100%, 14-column details, BOM/CRLF/escaping, empty data, no record mutation');

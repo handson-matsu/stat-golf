@@ -1,0 +1,10 @@
+import assert from 'node:assert/strict';
+import {DIRECTION_GUIDE,recommendedDirection} from '../operation-guides.js';
+import {TARGETS,csv,detailedCsv} from '../core.js';
+import {parseCsv} from './csv-helpers.cjs';
+assert.deepEqual(DIRECTION_GUIDE,{left:45,width:9});
+const value=recommendedDirection();assert.ok(value>=-1&&value<=1);assert.ok(Math.abs(value+.01)<1e-12);assert.equal((value+1)/2*100,DIRECTION_GUIDE.left+DIRECTION_GUIDE.width/2);
+const e={name:'途中で的を変更',mode:'experiment',shots:TARGETS.map(t=>({tool:'steady',target:t.id,x:t.x,y:t.y,score:t.points[0],power:.5,direction:.3,idealPower:.7,speedMultiplier:.7,idealDirection:value,time:'2026-10-10T12:00:00Z'}))},before=JSON.stringify(e),normal=csv(e),rows=parseCsv(detailedCsv(e));
+assert.equal(rows[0].length,14);assert.equal(rows[0][13],'推奨方向');rows.slice(1).forEach((r,i)=>{assert.equal(r[5],TARGETS[i].name);assert.equal(Number(r[13]),value);assert.equal(r[10],'0.3');});
+const old={...e,shots:e.shots.map(({idealDirection,...s})=>s)};assert.equal(csv(old),normal);assert.ok(parseCsv(detailedCsv(old)).slice(1).every(r=>r[13]===''));assert.equal(JSON.stringify(e),before);
+console.log('PASS: unchanged visual guide, -1..1 scale, all 3 targets, 14-column detail export, old records blank, normal CSV unchanged, no mutation');

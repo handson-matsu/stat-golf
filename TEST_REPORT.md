@@ -2,6 +2,20 @@
 
 2026-10-10に実施。コミット・push・外部公開は未実施。
 
+## 詳細CSVへ推奨方向を追加（2026-10-10）
+
+- 詳細CSVの末尾（14列目）に「推奨方向」を追加。尺度は方向と同じ-1〜1。
+- 画面の方向目印は従来どおり45%〜54%。中心49.5%から算出した-0.01を各発射にidealDirectionとして保存。浮動小数点の端数は12桁に丸めます。
+- 目印の表示と記録値はoperation-guides.jsの同一設定を参照。的への向きは既存ゲーム側で調整するため、現在は全的で共通値。
+- 旧記録の未記録分は詳細CSVで空欄。読み込みや出力時に旧データを書き換えません。通常CSVの7列は不変。
+- tests/direction-guide.test.js 成功：目印からの尺度変換、全3的の記録、詳細CSV14列、旧記録の空欄、通常CSVの不変性を確認。
+- tests/direction-guide-browser.cjs 成功：同じ実験で近・中・遠の的へ変更しながら3回発射。各方向バーの目印と保存値が一致し、選択した的も各記録で一致。再読み込みで値を維持し、詳細CSVと通常CSVを実際にダウンロードして検証。元の旧記録・保存実験は不変、実行時エラー0件。GAS通信は捕捉し実送信0回。
+- 既存の得点・統計・速度・CSV・アクセス記録の単体テスト、および12通りの固定乱数着弾の完全一致テストも成功。
+
+変更：app.js、core.js、新規operation-guides.js、package.json、README.md、TEST_REPORT.md。追加テスト：tests/direction-guide.test.js、tests/direction-guide-browser.cjs。詳細CSV列数の変更に合わせ、tests/csv.test.js、tests/csv-browser.cjs、tests/speed.test.js、tests/speed-browser.cjsの期待値も更新。
+
+ゲームの操作、得点・ランダム誤差・的の配置、統計分析は変更していません。コミット・pushは行っていません。
+
 ## CSV出力の整理（2026-10-10）
 
 通常CSVは次の7列だけを出力します：発射番号、大砲、狙った的、当たった的、得点、速度、日時。実験名はファイル名に含めます。
